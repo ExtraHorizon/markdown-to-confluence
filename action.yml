@@ -15,8 +15,7 @@ inputs:
     required: true
   confluence_ancestor_id:
     required: true
-  markdown_folder:
-    description: #The folder that contains markdown files to be pushed to confluence
-    default: './docs'
+  markdown_file:
+    description: # the markdown file to be pushed to confluence
     required: true
   
