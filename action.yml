@@ -18,4 +18,13 @@ inputs:
   markdown_file:
     description: # the markdown file to be pushed to confluence
     required: true
-  
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    CONFLUENCE_USER: ${{ inputs.confluence_user }}
+    CONFLUENCE_PASSWORD: ${{ inputs.confluence_password }}
+    CONFLUENCE_SPACE: ${{ inputs.space }}
+    CONFLUENCE_API_URL: ${{ inputs.confluence_api_url }}
+    CONFLUENCE_ANCESTOR_ID: ${{ inputs.confluence_ancestor_id }}
+    MARKDOWN_FILE: ${{ inputs.markdown_file }}
