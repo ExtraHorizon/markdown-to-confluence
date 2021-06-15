@@ -58,38 +58,13 @@ class ConfluenceRenderer(mistune.Renderer):
         """Renders the final layout of the content. This includes a two-column
         layout, with the authors and ToC on the left, and the content on the
         right.
-
-        The layout looks like this:
-
-        ------------------------------------------
-        |             |                          |
-        |             |                          |
-        | Sidebar     |         Content          |
-        | (30% width) |      (800px width)       |
-        |             |                          |
-        ------------------------------------------
-        
-        Arguments:
-            content {str} -- The HTML of the content
         """
-        toc = textwrap.dedent('''
-            <h1>Table of Contents</h1>
-            <p><ac:structured-macro ac:name="toc" ac:schema-version="1">
-                <ac:parameter ac:name="exclude">^(Authors|Table of Contents)$</ac:parameter>
-            </ac:structured-macro></p>''')
-        # Ignore the TOC if we haven't processed any headers to avoid making a
-        # blank one
-        if not self.has_toc:
-            toc = ''
-        authors = self.render_authors()
+
         column = textwrap.dedent('''
-            <ac:structured-macro ac:name="column" ac:schema-version="1">
-                <ac:parameter ac:name="width">{width}</ac:parameter>
-                <ac:rich-text-body>{content}</ac:rich-text-body>
-            </ac:structured-macro>''')
-        sidebar = column.format(width='30%', content=toc + authors)
-        main_content = column.format(width='800px', content=content)
-        return sidebar + main_content
+            {content}
+            ''')
+        main_content = column.format(content=content)
+        return main_content
 
     def header(self, text, level, raw=None):
         """Processes a Markdown header.

@@ -1,0 +1,30 @@
+name: 'Markdown To Confluence'
+branding:
+  icon: 'book-open'
+  color: 'blue'
+description: 'Convert markdown pages from a git repository to pages on Confluence'
+inputs:
+  confluence_user: #User that will post pages
+    description: 'Confluence User'
+    required: true
+  confluence_password: #API Password created for user
+    required: true
+  confluence_space: #The space in which the page needs to be added
+    required: true
+  confluence_api_url: #API Url 
+    required: true
+  confluence_ancestor_id:
+    required: true
+  markdown_file:
+    description: # the markdown file to be pushed to confluence
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    CONFLUENCE_USER: ${{ inputs.confluence_user }}
+    CONFLUENCE_PASSWORD: ${{ inputs.confluence_password }}
+    CONFLUENCE_SPACE: ${{ inputs.confluence_space }}
+    CONFLUENCE_API_URL: ${{ inputs.confluence_api_url }}
+    CONFLUENCE_ANCESTOR_ID: ${{ inputs.confluence_ancestor_id }}
+    MARKDOWN_FILE: ${{ inputs.markdown_file }}
