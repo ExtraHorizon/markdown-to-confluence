@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3.11.6-alpine3.18
 
 ARG SCRIPT_DIRECTORY=/usr/src/app/md-confluence
 ENV SCRIPT_DIRECTORY="${SCRIPT_DIRECTORY}"
